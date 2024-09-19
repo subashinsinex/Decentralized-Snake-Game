@@ -1,0 +1,126 @@
+/* Main App container */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+.App {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh; /* Full viewport height */
+	padding: 0;
+	margin: 0;
+	background: #282c34; /* Dark background for a retro feel */
+	color: #ffffff; /* White text color */
+	font-family: "Press Start 2P", cursive; /* Retro font */
+	overflow: hidden; /* Hide scrollbars */
+}
+
+/* Title */
+h1 {
+	margin: 20px 0;
+	font-size: 2rem;
+	text-shadow: 1.25px 1.25px 0 #00ff00; /* Retro text shadow */
+}
+
+h2 {
+	margin: 20px 0;
+	font-size: 1.75rem;
+	text-shadow: 1.25px 1.25px 0 #00ff00; /* Retro text shadow */
+}
+
+p {
+	text-shadow: 1.25px 1.25px 0 #00ff00;
+}
+
+li {
+	font-size: 1rem;
+	margin-left: 15px;
+	margin-bottom: 2px;
+}
+
+/* Layout container */
+.layout-container {
+	display: flex;
+	width: 100%;
+	height: calc(100vh - 60px); /* Adjust height to fit within viewport */
+	max-width: 1200px;
+}
+
+/*center, and right sections */
+.center,
+.right-side {
+	flex: 1;
+	padding: 20px;
+	box-sizing: border-box;
+	overflow: hidden; /* Prevent overflow within sections */
+}
+
+/* Center alignment for all sections */
+.center,
+.right-side {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Input and Button styles */
+input[type="text"] {
+	padding: 10px;
+	border: 2px solid #00ff00; /* Retro green border */
+	background: #000000; /* Black background */
+	color: #00ff00; /* Retro green text color */
+	font-family: "Press Start 2P", cursive; /* Retro font */
+	font-size: 1rem;
+	margin-bottom: 10px;
+	text-align: center;
+	width: 100%; /* Full width for consistency */
+	max-width: 800px; /* Limit width for input field */
+	box-sizing: border-box;
+}
+
+button {
+	padding: 10px 20px;
+	border: 2px solid #00ff00; /* Retro green border */
+	background: #000000; /* Black background */
+	color: #00ff00; /* Retro green text color */
+	font-family: "Press Start 2P", cursive; /* Retro font */
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+	width: 100%; /* Full width for consistency */
+	max-width: 400px; /* Limit width for button */
+	box-sizing: border-box;
+}
+
+button:hover {
+	background-color: #00ff00; /* Retro green background on hover */
+	color: #000000; /* Black text color on hover */
+}
+
+/* Canvas border */
+canvas {
+	border: 2px solid #00ff00; /* Retro green border */
+	background: #000000; /* Black background */
+	width: 100%; /* Full width of the container */
+	max-width: 800px; /* Increased width for larger canvas */
+	max-height: 600px; /* Limit height for larger canvas */
+	height: auto; /* Maintain aspect ratio */
+}
+
+.game-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+canvas {
+	border: 1px solid #000;
+}
+
+.game-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 1rem;
+}

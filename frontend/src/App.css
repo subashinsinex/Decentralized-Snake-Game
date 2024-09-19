@@ -1,0 +1,43 @@
+.App {
+	text-align: center;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	background: #282c34; /* Dark background */
+	color: #ffffff; /* White text color */
+	font-family: "Press Start 2P", cursive; /* Retro font */
+}
+
+.layout-container {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start; /* Align items to the top of the container */
+	width: 100%;
+	max-width: 1200px;
+	height: calc(100vh - 60px); /* Adjust height to fit within viewport */
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-right: 20px; /* Add margin for spacing if needed */
+	width: 100%;
+}
+
+.right-side {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.game-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
