@@ -7,7 +7,7 @@
   const app = express();
   app.use(cors());
   app.use(express.json());
-
+  const PORT = process.env.PORT || 3001;
   // Connect to MongoDB
   mongoose
     .connect("mongodb://localhost:27017/snakeGame")
@@ -41,6 +41,7 @@
     return '127.0.0.1'; // Fallback if no external IP is found
   };
 
+  const myIp = getIPAddress();
   // Route to get all high scores
   app.get("/api/getHighScores", async (req, res) => {
     const players = await Player.find().sort({ score: -1 }).limit(5);
@@ -91,46 +92,52 @@
 
     // Include your server's own IP and port in the list of addresses
     const myIp = getIPAddress();
-    const myPort = toString(server.address().port);
+    const myPort = String(PORT);
     addresses.push({ ip: myIp, port: myPort });
-    console.log(addresses);
     // Post the addresses to each known server
     for (const address of addresses) {
-      console.log(typeof myPort+" "+address.ip+" "+address.port);
-      if(address.ip!==myIp){
-        const url = `http://${address.ip}:${address.port}/api/addAddress`;
-        try {
-          await axios.post(url, { addresses });
-          console.log(`Successfully sent addresses to ${address.ip}:${address.port}`);
-        } catch (error) {
-          console.error(`Could not send addresses to ${address.ip}:${address.port}`, error);
-        }
+          const url = `http://${address.ip}:${address.port}/api/addAddress`;
+          try {
+            await axios.post(url, { addresses });
+            console.log(`Successfully sent addresses to ${address.ip}:${address.port}`);
+          } catch (error) {
+            console.error(`Could not send addresses to ${address.ip}:${address.port}`, error);
+          }
       }
       res.sendStatus(200);
-      }
   });
 
   // Route to add new server addresses (IP and port)
-  app.post("/api/addAddress", async (req, res) => {
-    const addresses = req.body.addresses;
-    
-    for (let addr of addresses) {
-      const { ip, port } = addr;
-    
-      // Check if the address already exists
-      let address = await Address.findOne({ ip, port });
-      if (!address) {
-      // Add the new address if it doesn't already exist
+ // Route to add new server addresses (IP and port)
+app.post("/api/addAddress", async (req, res) => {
+  const addresses = req.body.addresses;
+  
+  for (let addr of addresses) {
+    const { ip, port } = addr;
+  
+    // Check if the address already exists
+    let address = await Address.findOne({ ip, port });
+    //console.log(address);
+    if (!address) {
+    // Add the new address if it doesn't already exist
+    //console.log(typeof ip,ip,typeof myIp, myIp);
+    if(ip != myIp){
+
+    try {
       address = new Address({ ip, port });
       await address.save();
+      console.log("Address saved successfully");
+    } catch (error) {
+      console.error("Error saving address:", error.message);
+    }
       }
     }
-    
-    res.sendStatus(200);
-    });
+  }
+  
+  res.sendStatus(200);
+  });
     
   // Listen on the specified port
-  const PORT = process.env.PORT || 3001;
   const server = app.listen(PORT, () => {
     const myIp = getIPAddress();
     const myPort = server.address().port;
